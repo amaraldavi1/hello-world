@@ -15,12 +15,8 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                sh 'mvn clean verify sonar:sonar  -Dsonar.projectKey=test-Project  -Dsonar.host.url=http://localhost:9000 -Dsonar.login=dcdd54218f0cb93039b54091fd293021afb41d6c' 
             }
-            post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml' 
-                }
             }
         }
     }
